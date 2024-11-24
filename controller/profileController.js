@@ -37,7 +37,18 @@ const readAllProfiles = async (req, res) => {
   }
 };
 
-const updateProfile = (req, res) => {};
+const updateProfile = async (req, res) => {
+  const profileId = req.params.id;
+  try {
+    const result = await update(profileId, req.body);
+    if (!result) {
+      return res.status(404).json({ error: `Profile id '${profileId}' not found` });
+    }
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
 
 const deleteProfile = (req, res) => {};
 
