@@ -4,15 +4,16 @@ const e = require("express");
 const PROFILE_COLLECTION = "profiles";
 
 const create = async (body) => {
-  const validationResult = validateProfile(body);
-  if (validationResult.error) {
-    throw new Error(validationResult.error.message);
+  let validProfile;
+  try {
+    validProfile = validateBody(body);
+  } catch (err) {
+    throw new Error(err.message);
   }
-  const validProfile = validationResult.value;
 
   try {
     const docRef = await db.collection(PROFILE_COLLECTION).add(validProfile);
-    return  { id: docRef.id, ...validProfile };
+    return { id: docRef.id, ...validProfile };
   } catch (err) {
     throw new Error(err.message);
   }
@@ -40,11 +41,12 @@ const readAll = async () => {
 };
 
 const update = async (id, body) => {
-  const validationResult = validateProfile(body);
-  if (validationResult.error) {
-    throw new Error(validationResult.error.message);
+  let validProfile;
+  try {
+    validProfile = validateBody(body);
+  } catch (err) {
+    throw new Error(err.message);
   }
-  const validProfile = validationResult.value;
 
   try {
     await db.collection(PROFILE_COLLECTION).doc(id).set(validProfile);
@@ -55,6 +57,14 @@ const update = async (id, body) => {
 };
 
 const remove = (id) => {};
+
+const validateBody = body => {
+  const validationResult = validateProfile(body);
+  if (validationResult.error) {
+    throw new Error(validationResult.error.message);
+  }
+  return validationResult.value;
+}
 
 module.exports = {
   create,
