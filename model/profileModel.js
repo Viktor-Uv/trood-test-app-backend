@@ -1,6 +1,5 @@
 const db = require("../firestore");
 const validateProfile = require("../validator/profileValidator");
-const e = require("express");
 const PROFILE_COLLECTION = "profiles";
 
 const create = async (body) => {
@@ -62,16 +61,12 @@ const update = async (id, body) => {
 const remove = async (id) => {
   try {
     await db.collection(PROFILE_COLLECTION).doc(id).delete();
-    return id;
   } catch (err) {
-    if (err.code === 5) {
-      return null;
-    }
     throw new Error(err.message);
   }
 };
 
-const validateBody = body => {
+const validateBody = (body) => {
   const validationResult = validateProfile(body);
   if (validationResult.error) {
     throw new Error(validationResult.error.message);
