@@ -4,10 +4,9 @@ const e = require("express");
 const PROFILE_COLLECTION = "profiles";
 
 const create = async (body) => {
-  try {
-    validateProfile(body);
-  } catch (error) {
-    throw new Error(`Validation Error: ${error.details}`);
+  const validationResult = validateProfile(body);
+  if (validationResult.error) {
+    throw new Error(validationResult.error.message);
   }
 
   try {
