@@ -50,7 +50,14 @@ const updateProfile = async (req, res) => {
   }
 };
 
-const deleteProfile = (req, res) => {};
+const deleteProfile = async (req, res) => {
+  try {
+    await remove(req.params.id);
+    res.status(204);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 module.exports = {
   createProfile,
