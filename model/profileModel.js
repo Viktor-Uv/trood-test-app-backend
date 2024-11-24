@@ -18,7 +18,17 @@ const create = async (body) => {
   }
 };
 
-const read = (id) => {};
+const read = async (id) => {
+  try {
+    const doc = await db.collection(PROFILE_COLLECTION).doc(id).get();
+    if (!doc.exists) {
+      return null;
+    }
+    return { id: doc.id, ...doc.data() };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
 const readAll = () => {};
 
