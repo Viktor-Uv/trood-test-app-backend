@@ -1,11 +1,19 @@
 const {db} = require("../firestore");
 
-export const create = (body, cb) => {};
+const create = (body, cb) => {};
 
-export const read = (id, cb) => {};
+const read = (id, cb) => {};
 
-export const readAll = (cb) => {};
+const readAll = (cb) => {};
 
-export const update = (id, body, cb) => {};
+const update = (id, body, cb) => {};
 
-export const remove = (id, cb) => {};
+const remove = (id, cb) => {};
+
+module.exports = {
+  create,
+  read,
+  readAll,
+  update,
+  remove
+};

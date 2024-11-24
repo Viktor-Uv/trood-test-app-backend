@@ -6,12 +6,20 @@ const {
   remove
 } = require("../model/profileModel");
 
-export const createProfile = (req, res) => {};
+const createProfile = (req, res) => {};
 
-export const readProfile = (req, res) => {};
+const readProfile = (req, res) => {};
 
-export const readAllProfiles = (req, res) => {};
+const readAllProfiles = (req, res) => {};
 
-export const updateProfile = (req, res) => {};
+const updateProfile = (req, res) => {};
 
-export const deleteProfile = (req, res) => {};
+const deleteProfile = (req, res) => {};
+
+module.exports = {
+  createProfile,
+  readProfile,
+  readAllProfiles,
+  updateProfile,
+  deleteProfile
+};
