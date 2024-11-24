@@ -39,7 +39,20 @@ const readAll = async () => {
   }
 };
 
-const update = (id, body) => {};
+const update = async (id, body) => {
+  const validationResult = validateProfile(body);
+  if (validationResult.error) {
+    throw new Error(validationResult.error.message);
+  }
+  const validProfile = validationResult.value;
+
+  try {
+    await db.collection(PROFILE_COLLECTION).doc(id).set(validProfile);
+    return { id, ...validProfile };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
 const remove = (id) => {};
 
