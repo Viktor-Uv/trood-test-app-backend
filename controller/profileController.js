@@ -6,7 +6,14 @@ const {
   remove
 } = require("../model/profileModel");
 
-const createProfile = (req, res) => {};
+const createProfile = async (req, res) => {
+  try {
+    const result = await create(req.body);
+    res.status(201).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
 
 const readProfile = (req, res) => {};
 
