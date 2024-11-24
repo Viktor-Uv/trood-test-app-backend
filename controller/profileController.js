@@ -15,7 +15,17 @@ const createProfile = async (req, res) => {
   }
 };
 
-const readProfile = (req, res) => {};
+const readProfile = async (req, res) => {
+  try {
+    const profile = await read(req.params.id);
+    if (!profile) {
+      return res.status(404).json({ error: "Profile not found" });
+    }
+    res.status(200).json(profile);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 const readAllProfiles = (req, res) => {};
 
