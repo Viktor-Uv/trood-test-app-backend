@@ -59,7 +59,17 @@ const update = async (id, body) => {
   }
 };
 
-const remove = (id) => {};
+const remove = async (id) => {
+  try {
+    await db.collection(PROFILE_COLLECTION).doc(id).delete();
+    return id;
+  } catch (err) {
+    if (err.code === 5) {
+      return null;
+    }
+    throw new Error(err.message);
+  }
+};
 
 const validateBody = body => {
   const validationResult = validateProfile(body);
