@@ -28,7 +28,14 @@ const readProfile = async (req, res) => {
   }
 };
 
-const readAllProfiles = (req, res) => {};
+const readAllProfiles = async (req, res) => {
+  try {
+    const result = await readAll();
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 const updateProfile = (req, res) => {};
 
