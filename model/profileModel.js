@@ -30,7 +30,14 @@ const read = async (id) => {
   }
 };
 
-const readAll = () => {};
+const readAll = async () => {
+  try {
+    const snapshot = await db.collection(PROFILE_COLLECTION).get();
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
 const update = (id, body) => {};
 
