@@ -12,5 +12,5 @@ app.use(express.json());
 app.use("/", profileRouter);
 
 app.listen(port, () => {
-  console.log(`The app is listening at port ${port}`);
+  console.log(`The app is listening on port ${port}`);
 });
