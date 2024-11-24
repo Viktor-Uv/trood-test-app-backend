@@ -52,6 +52,9 @@ const update = async (id, body) => {
     await db.collection(PROFILE_COLLECTION).doc(id).update(validProfile);
     return { id, ...validProfile };
   } catch (err) {
+    if (err.code === 5) {
+      return null;
+    }
     throw new Error(err.message);
   }
 };
