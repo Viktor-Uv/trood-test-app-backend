@@ -49,7 +49,7 @@ const update = async (id, body) => {
   }
 
   try {
-    await db.collection(PROFILE_COLLECTION).doc(id).set(validProfile);
+    await db.collection(PROFILE_COLLECTION).doc(id).update(validProfile);
     return { id, ...validProfile };
   } catch (err) {
     throw new Error(err.message);
