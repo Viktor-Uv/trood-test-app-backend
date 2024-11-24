@@ -1,5 +1,7 @@
 const db = require("../firestore");
 const validateProfile = require("../validator/profileValidator");
+const ValidationError = require("../error/ValidationError");
+
 const PROFILE_COLLECTION = "profiles";
 
 const create = async (body) => {
@@ -7,7 +9,7 @@ const create = async (body) => {
   try {
     validProfile = validateBody(body);
   } catch (err) {
-    throw new Error(err.message);
+    throw new ValidationError(err.message);
   }
 
   try {
@@ -44,7 +46,7 @@ const update = async (id, body) => {
   try {
     validProfile = validateBody(body);
   } catch (err) {
-    throw new Error(err.message);
+    throw new ValidationError(err.message);
   }
 
   try {

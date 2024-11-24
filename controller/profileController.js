@@ -5,13 +5,17 @@ const {
   update,
   remove
 } = require("../model/profileModel");
+const ValidationError = require("../error/ValidationError");
 
 const createProfile = async (req, res) => {
   try {
     const result = await create(req.body);
     res.status(201).json(result);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    if (err instanceof ValidationError) {
+      return res.status(400).json({ error: err.message });
+    }
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -46,7 +50,10 @@ const updateProfile = async (req, res) => {
     }
     res.status(200).json(result);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    if (err instanceof ValidationError) {
+      return res.status(400).json({ error: err.message });
+    }
+    res.status(500).json({ error: err.message });
   }
 };
 
