@@ -21,6 +21,18 @@ const uploadAvatar = async (req, res) => {
   }
 };
 
-const fetchAvatar = async (req, res) => {};
+const fetchAvatar = async (req, res) => {
+  const filename = req.params.filename;
+
+  try {
+    const filePath = await fetch(filename);
+    res.status(200).sendFile(filePath);
+  } catch (err) {
+    if (err instanceof NotFoundError) {
+      return res.status(404).json({ error: err.message });
+    }
+    res.status(500).json({ error: err.message });
+  }
+};
 
 module.exports = { uploadAvatar, fetchAvatar };
