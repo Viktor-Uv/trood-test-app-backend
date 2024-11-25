@@ -1,6 +1,8 @@
 const Joi = require('joi');
 const ValidationError = require("../error/ValidationError");
 
+const allowedUrl = { scheme: ['http', 'https'] };
+
 const profileSchema = Joi.object({
   name: Joi.string()
     .pattern(
@@ -53,7 +55,7 @@ const profileSchema = Joi.object({
     .max(10),
 
   link: Joi.string()
-    .uri()
+    .uri(allowedUrl)
     .max(200),
 
   profileVisibility: Joi.string()
@@ -61,7 +63,7 @@ const profileSchema = Joi.object({
     .default('Private'),
 
   avatar: Joi.string()
-    .uri()
+    .uri(allowedUrl)
 });
 
 const validateProfile = (profile) => {
