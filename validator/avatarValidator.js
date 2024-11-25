@@ -13,7 +13,7 @@ const avatarSchema = Joi.object({
 }).unknown();
 
 const validateAvatar = (file) => {
-  const {error} = avatarSchema.validate(file);
+  const { error } = avatarSchema.validate(file);
   if (error) {
     throw new ValidationError(error.message);
   }
