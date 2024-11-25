@@ -7,10 +7,10 @@ const upload = async (file) => {
   validateAvatar(file);
 
   // Generate filepath and filename
-  const randomNum = Math.floor(1000 + Math.random() * 9000); // Random 4-digits number
   const timestamp = Date.now();
+  const randomNum = Math.floor(1000 + Math.random() * 9000); // Random 4-digits number
   const fileExt = path.extname(file.originalname);
-  const fileName = `${randomNum}${timestamp}${fileExt}`;
+  const fileName = `${timestamp}${randomNum}${fileExt}`;
   const uploadDir = path.join(__dirname, "../public/avatar");
   const filePath = path.join(uploadDir, fileName);
 
