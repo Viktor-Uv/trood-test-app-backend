@@ -8,6 +8,7 @@ const avatarSchema = Joi.object({
 
   size: Joi.number()
     .max(5 * 1024 * 1024) // (5 * 2^10) - 5 MB filesize limit
+    .message("Filesize must be less than or equal to 5 MB")
     .required(),
 }).unknown();
 
