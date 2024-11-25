@@ -7,7 +7,7 @@ const profileSchema = Joi.object({
   name: Joi.string()
     .pattern(
       /^[A-Za-zА-Яа-яЁё\s-]+$/,
-      { name: "[only letters, spaces & hyphens]" }
+      { name: "[letters, spaces & hyphens]" }
     )
     .min(2)
     .max(50)
@@ -32,7 +32,7 @@ const profileSchema = Joi.object({
   phone: Joi.string()
     .pattern(
       /^\+\d{10,15}$/,
-      { name: "[starts with '+' and followed by 10-15 digits]" }
+      { name: "[symbol '+' followed by 10-15 digits]" }
     )
     .required(),
 
