@@ -9,7 +9,7 @@ const avatarSchema = Joi.object({
   size: Joi.number()
     .max(5 * 1024 * 1024) // (5 * 2^10) - 5 MB filesize limit
     .required(),
-});
+}).unknown();
 
 const validateAvatar = (file) => {
   const {error} = avatarSchema.validate(file);
