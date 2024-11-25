@@ -1,9 +1,13 @@
 const validateAvatar = require("../validator/avatarValidator");
+const ValidationError = require("../error/ValidationError");
 const NotFoundError = require("../error/NotFoundError");
 const path = require("path");
 const fs = require("fs");
 
 const upload = async (file) => {
+  if (!file) {
+    throw new ValidationError("File is required");
+  }
   validateAvatar(file);
 
   // Generate filepath and filename
