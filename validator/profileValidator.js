@@ -59,6 +59,9 @@ const profileSchema = Joi.object({
   profileVisibility: Joi.string()
     .valid('Public', 'Private')
     .default('Private'),
+
+  avatar: Joi.string()
+    .uri()
 });
 
 const validateProfile = (profile) => {
