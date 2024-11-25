@@ -1,6 +1,7 @@
 const db = require("../firestore");
 const validateProfile = require("../validator/profileValidator");
 const ValidationError = require("../error/ValidationError");
+const NotFoundError = require("../error/NotFoundError");
 
 const PROFILE_COLLECTION = "profiles";
 
@@ -24,10 +25,13 @@ const read = async (id) => {
   try {
     const doc = await db.collection(PROFILE_COLLECTION).doc(id).get();
     if (!doc.exists) {
-      return null;
+      throw new NotFoundError();
     }
     return { id: doc.id, ...doc.data() };
   } catch (err) {
+    if (err instanceof NotFoundError) {
+      throw new NotFoundError(`Id '${id}' not found`);
+    }
     throw new Error(err.message);
   }
 };
@@ -54,7 +58,7 @@ const update = async (id, body) => {
     return { id, ...validProfile };
   } catch (err) {
     if (err.code === 5) {
-      return null;
+      throw new NotFoundError(`Id '${id}' not found`);
     }
     throw new Error(err.message);
   }
