@@ -7,6 +7,6 @@ const tmpStorage = multer({ storage: multer.memoryStorage() });
 
 router.post(AVATAR_PATH, tmpStorage.single("avatar"), uploadAvatar);
 
-router.get(`${AVATAR_PATH}/:id`, fetchAvatar);
+router.get(`${AVATAR_PATH}/:filename`, fetchAvatar);
 
 module.exports = router;
