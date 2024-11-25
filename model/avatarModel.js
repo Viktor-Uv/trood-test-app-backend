@@ -20,7 +20,7 @@ const upload = async (file) => {
   }
 
   await fs.promises.writeFile(filePath, file.buffer);
-  return path.relative(__dirname, filePath);
+  return fileName;
 };
 
 const fetch = async (url) => {};
