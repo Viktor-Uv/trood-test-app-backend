@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const ValidationError = require("../error/ValidationError");
 
 const profileSchema = Joi.object({
   name: Joi.string()
@@ -60,6 +61,12 @@ const profileSchema = Joi.object({
     .default('Private'),
 });
 
-const validateProfile = profile => profileSchema.validate(profile);
+const validateProfile = (profile) => {
+  const { error, value } = profileSchema.validate(profile);
+  if (error) {
+    throw new ValidationError(error.message);
+  }
+  return value;
+};
 
 module.exports = validateProfile;

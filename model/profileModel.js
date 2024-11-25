@@ -1,11 +1,10 @@
 const db = require("../firestore");
 const validateProfile = require("../validator/profileValidator");
-const ValidationError = require("../error/ValidationError");
 const NotFoundError = require("../error/NotFoundError");
 const PROFILE_COLLECTION = "profiles";
 
 const create = async (body) => {
-  const validProfile = validateBody(body);
+  const validProfile = validateProfile(body);
   const docRef = await db.collection(PROFILE_COLLECTION).add(validProfile);
   return { id: docRef.id, ...validProfile };
 };
@@ -24,7 +23,7 @@ const readAll = async () => {
 };
 
 const update = async (id, body) => {
-  const validProfile = validateBody(body);
+  const validProfile = validateProfile(body);
 
   try {
     await db.collection(PROFILE_COLLECTION).doc(id).update(validProfile);
@@ -40,14 +39,6 @@ const update = async (id, body) => {
 const remove = async (id) => {
   await db.collection(PROFILE_COLLECTION).doc(id).delete();
 };
-
-const validateBody = (body) => {
-  const validationResult = validateProfile(body);
-  if (validationResult.error) {
-    throw new ValidationError(validationResult.error.message);
-  }
-  return validationResult.value;
-}
 
 module.exports = {
   create,
