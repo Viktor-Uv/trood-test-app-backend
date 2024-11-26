@@ -3,7 +3,6 @@ const app = express();
 const logger = require('morgan');
 const cors = require("cors");
 const port = process.env.PORT || 8000;
-require('dotenv').config();
 const profileRouter = require("./route/profileRouter");
 const avatarRouter = require("./route/avatarRouter");
 
