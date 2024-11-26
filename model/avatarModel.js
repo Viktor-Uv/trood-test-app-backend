@@ -1,8 +1,12 @@
 const validateAvatar = require("../validator/avatarValidator");
 const ValidationError = require("../error/ValidationError");
 const NotFoundError = require("../error/NotFoundError");
-const path = require("path");
 const fs = require("fs");
+const {
+  generateFileName,
+  generateFullPath,
+  ensureDirectoryExists
+} = require("../util/fileUtility");
 const AVATAR_FILEPATH = "../public/avatar";
 
 const upload = async (file) => {
@@ -10,31 +14,18 @@ const upload = async (file) => {
     throw new ValidationError("File is required");
   }
   validateAvatar(file);
-
-  // Generate filepath and filename
-  const timestamp = Date.now();
-  const randomNum = Math.floor(1000 + Math.random() * 9000); // Random 4-digits number
-  const fileExt = path.extname(file.originalname);
-  const fileName = `${timestamp}${randomNum}${fileExt}`;
-  const uploadDir = path.join(__dirname, AVATAR_FILEPATH);
-  const filePath = path.join(uploadDir, fileName);
-
-  // Ensure the directory exists
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-  }
-
+  ensureDirectoryExists(__dirname, AVATAR_FILEPATH);
+  const fileName = generateFileName(file.originalname);
+  const filePath = generateFullPath(__dirname, AVATAR_FILEPATH, fileName);
   await fs.promises.writeFile(filePath, file.buffer);
   return fileName;
 };
 
-const fetch = async (filename) => {
-  const filePath = path.join(__dirname, AVATAR_FILEPATH, filename);
-
+const fetch = async (fileName) => {
+  const filePath = generateFullPath(__dirname, AVATAR_FILEPATH, fileName);
   if (!fs.existsSync(filePath)) {
-    throw new NotFoundError(`${filename} not found`);
+    throw new NotFoundError(`${fileName} not found`);
   }
-
   return filePath;
 };
 
