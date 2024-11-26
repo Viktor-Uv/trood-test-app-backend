@@ -1,0 +1,10 @@
+node_modules
+.idea
+.git
+/public/avatar
+README.MD
+Dockerfile
+.dockerignore
+.gitignore
+package-lock.json
+*.iml
