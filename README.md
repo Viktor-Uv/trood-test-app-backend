@@ -1,7 +1,7 @@
 # A testing back-end application made with Node.js and a Firebase database for Trood
 
 ## YouTube Demo
-<div style="text-align: center;">
+<div align="center">
   <a href="https://www.youtube.com/watch?v=mArHXdNxXoE">
     <img src="https://img.youtube.com/vi/mArHXdNxXoE/0.jpg" alt="Watch on YouTube">
   </a>
