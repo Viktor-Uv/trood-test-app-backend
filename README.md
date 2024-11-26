@@ -1,11 +1,7 @@
 # A testing back-end application made with Node.js and a Firebase database for Trood
 
 ## YouTube Demo
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=mArHXdNxXoE">
-    <img src="https://img.youtube.com/vi/mArHXdNxXoE/0.jpg" alt="Watch on YouTube">
-  </a>
-</div>
+[![Watch on YouTube](https://drive.usercontent.google.com/download?id=1h9JcPvUP9Hrzwm0msCFUjHTkHXu-lWOD)](https://www.youtube.com/watch?v=mArHXdNxXoE)
 
 ### Features
 - **User Profile Management:** Allows creating, reading, updating, and deleting user profiles.
@@ -23,10 +19,10 @@ git clone git@github.com:Viktor-Uv/trood-test-app-backend.git
 cd trood-test-app-backend
 ```
 
-#### Set up Firestore Project
+#### Set up Firestore Database
 1. Create a Firebase project with a Firestore database
 2. Generate the Service Account Key from the **Project Settings > Service Accounts > Generate new private key**
-3. Place the serviceAccountKey.json file in the root of your project.
+3. Place the serviceAccountKey.json file in the root of this project.
 
 #### Option 1: Local Installation
 ```shell
