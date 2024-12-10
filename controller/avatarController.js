@@ -2,9 +2,11 @@ const { upload, fetch } = require("../model/avatarModel");
 const ValidationError = require("../error/ValidationError");
 const NotFoundError = require("../error/NotFoundError");
 const buildFileUrl = require("../util/urlUtility");
+const { parseSingleFile } = require("../util/fileParser");
 
 const uploadAvatar = async (req, res) => {
   try {
+    await parseSingleFile(req, res);
     const uploadedAvatarFileName = await upload(req.file);
     const avatarUrl = buildFileUrl(
       req.protocol,
