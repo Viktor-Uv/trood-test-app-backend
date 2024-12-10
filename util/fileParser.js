@@ -1,12 +1,12 @@
-import multer from "multer";
-import ValidationError from "../error/ValidationError.js";
+const multer = require("multer");
+const ValidationError = require("../error/ValidationError.js");
 
 const multerParser = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-export const parseSingleFile = (req, res) => {
+exports.parseSingleFile = (req, res) => {
   const multerMiddleware = multerParser.any();
 
   return new Promise((resolve, reject) => {
